@@ -41,7 +41,7 @@ float expr(const char str[]);
 void do_protocol(void);
 void do_command(void);
 void print_calibrations(void);
-void start_on_open_close(void); 
+void start_on_open_close(void);
 void start_on_pin_high(int pin);
 void get_compass_and_angle (int notRaw, int _averages);
 float get_thickness (int notRaw, int _averages);

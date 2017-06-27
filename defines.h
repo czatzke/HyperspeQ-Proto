@@ -200,6 +200,7 @@ EXTERN Adafruit_BME280 bme2;
 //#define LED2200k       16
 //#define LED470         20
 //#define LED2200K       2
+#define SPEC_ADC_CHANNEL 3
 #if CORAL_SPEQ
 #define SPEC_CHANNELS    256
 #else

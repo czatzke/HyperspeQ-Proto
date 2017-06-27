@@ -1,5 +1,5 @@
 
-// Firmware for MultispeQ 1.0 hardware. v1.1.8  Part of the PhotosynQ project. THis firmware has been modified
+// Firmware for MultispeQ 1.0 hardware. v1.1.8  Part of the PhotosynQ project.
 
 // setup() - initize things on startup
 // main loop is in loop.cpp
@@ -370,6 +370,7 @@ void readSpectrometer(int intTime, int delay_time, int read_time, int accumulate
   delayMicroseconds(delay_time);
 
   // Step 5: Read Data 2 (this is the actual read, since the spectrometer has now sampled data)
+  AD7689_set( SPEC_ADC_CHANNEL );
   idx = 0;
   for (int i = 0; i < SPEC_CHANNELS; i++) {
     // Four clocks per pixel
@@ -382,9 +383,11 @@ void readSpectrometer(int intTime, int delay_time, int read_time, int accumulate
 
     // Analog value is valid on low transition
     if (accumulateMode == false) {
+      AD7689_sample();
       spec_data[idx] = AD7689_read_sample();
       spec_data_average[idx] += spec_data[idx];
     } else {
+      AD7689_sample();
       spec_data[idx] += AD7689_read_sample();
     }
     idx += 1;
@@ -411,7 +414,7 @@ void readSpectrometer(int intTime, int delay_time, int read_time, int accumulate
     digitalWrite(SPEC_CLK, HIGH);
     delayMicroseconds(delay_time);
   }
-  Serial_Print("readSpectrometer2");
+  //Serial_Print("readSpectrometer2");
 }
 
 void print_data()
